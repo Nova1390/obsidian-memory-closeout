@@ -12,6 +12,7 @@ import zipfile
 SKILL_NAME = "obsidian-memory-closeout"
 REQUIRED_FILES = {
     "SKILL.md",
+    "LICENSE.txt",
     "agents/openai.yaml",
     "references/memory-note-schema.md",
     "references/transcript-processing.md",
