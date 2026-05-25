@@ -16,18 +16,29 @@ The skill is intentionally privacy-first: it guides Codex to write durable memor
 - Runs a local secret scan before committing or handing off.
 - Refreshes Graphify-derived indexes when `graphify` is available.
 
+## Why Not Raw Transcripts?
+
+Raw transcripts are noisy, often mix durable decisions with drafting chatter, and can accidentally contain secrets or sensitive details. They are also hard to maintain as reliable long-term memory because context, uncertainty, and outdated statements are difficult to separate later.
+
+This skill prefers curated closeouts: decisions, session summaries, project updates, and proposals that preserve useful context without storing unnecessary raw material.
+
 ## Repository Layout
 
 ```text
 .
 ├── skill/obsidian-memory-closeout/   # Installable Codex skill package
 ├── examples/                         # Sanitized example outputs
+├── assets/                           # Public repository images
 ├── docs/                             # Graphify, release, and quality docs
 ├── scripts/                          # Repo validation and packaging helpers
 ├── .github/workflows/validate.yml     # CI validation
 ├── PRIVACY.md                        # Privacy model and public repo boundaries
 └── README.md
 ```
+
+## GitHub Social Preview
+
+The social preview image is available at [assets/social-preview.png](assets/social-preview.png). To set it manually, open the GitHub repository settings, go to **General** -> **Social preview**, and upload that file.
 
 ## Install
 
@@ -134,6 +145,10 @@ You can also provide a vault path explicitly:
 ```text
 Use /path/to/my/vault and create a memory closeout for this transcript.
 ```
+
+## Examples
+
+See [examples/before-after.md](examples/before-after.md) for a minimal synthetic before/after showing how a noisy AI session input becomes curated Obsidian notes without storing the raw transcript.
 
 ## Privacy
 
