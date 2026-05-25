@@ -1,5 +1,7 @@
 # Obsidian Memory Closeout
 
+![Obsidian Memory Closeout social preview](assets/social-preview.png)
+
 [![Validate](https://github.com/Nova1390/obsidian-memory-closeout/actions/workflows/validate.yml/badge.svg)](https://github.com/Nova1390/obsidian-memory-closeout/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
