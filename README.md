@@ -75,7 +75,7 @@ Restart Codex after copying.
 
 ## Graphify Integration
 
-Graphify support is optional and privacy-aware. The skill treats Markdown notes as the source of truth and Graphify output as a derived index that can be refreshed after curated notes are written.
+Graphify support is optional and privacy-aware. The skill integrates with [safishamsi/graphify](https://github.com/safishamsi/graphify), treating Markdown notes as the source of truth and Graphify output as a derived index that can be refreshed after curated notes are written.
 
 When `graphify` is installed, Codex can run:
 
