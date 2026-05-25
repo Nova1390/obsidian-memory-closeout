@@ -1,0 +1,4 @@
+interface:
+  display_name: "Obsidian Memory Closeout"
+  short_description: "Curated Obsidian memory closeouts"
+  default_prompt: "Create a curated memory closeout for this session in my Obsidian vault, update durable notes, and refresh Graphify if available."
