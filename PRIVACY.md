@@ -29,6 +29,7 @@ When the skill is used, Codex should:
 - Ask for a vault path when it cannot be inferred safely.
 - Run a secret scan before commits or handoff when files were written.
 - Treat Graphify output as derived data, not as the canonical memory source.
+- Review `.graphifyignore` before refreshing Graphify so raw transcripts, caches, exports, and other sensitive folders stay out of the derived graph.
 
 ## Review Checklist
 

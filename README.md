@@ -1,6 +1,6 @@
 # Obsidian Memory Closeout
 
-[![Validate](https://github.com/Nova1390/Obsidian-memory-closeout/actions/workflows/validate.yml/badge.svg)](https://github.com/Nova1390/Obsidian-memory-closeout/actions/workflows/validate.yml)
+[![Validate](https://github.com/Nova1390/obsidian-memory-closeout/actions/workflows/validate.yml/badge.svg)](https://github.com/Nova1390/obsidian-memory-closeout/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 `obsidian-memory-closeout` is a Codex skill for turning meaningful work sessions, transcripts, decisions, and project updates into curated Markdown notes for an Obsidian-compatible vault.
@@ -22,6 +22,7 @@ The skill is intentionally privacy-first: it guides Codex to write durable memor
 .
 ├── skill/obsidian-memory-closeout/   # Installable Codex skill package
 ├── examples/                         # Sanitized example outputs
+├── docs/                             # Graphify, release, and quality docs
 ├── scripts/                          # Repo validation and packaging helpers
 ├── .github/workflows/validate.yml     # CI validation
 ├── PRIVACY.md                        # Privacy model and public repo boundaries
@@ -35,7 +36,7 @@ The skill is intentionally privacy-first: it guides Codex to write durable memor
 Ask Codex to install the skill from this GitHub directory:
 
 ```text
-$skill-installer install https://github.com/Nova1390/Obsidian-memory-closeout/tree/main/skill/obsidian-memory-closeout
+$skill-installer install https://github.com/Nova1390/obsidian-memory-closeout/tree/main/skill/obsidian-memory-closeout
 ```
 
 Restart Codex after installation so the skill is discovered.
@@ -45,8 +46,8 @@ Restart Codex after installation so the skill is discovered.
 Clone the repository, then install the skill into your local Codex skills directory:
 
 ```bash
-git clone https://github.com/Nova1390/Obsidian-memory-closeout.git
-cd Obsidian-memory-closeout
+git clone https://github.com/Nova1390/obsidian-memory-closeout.git
+cd obsidian-memory-closeout
 ./scripts/install_local.sh
 ```
 
@@ -71,6 +72,24 @@ cp -R skill/obsidian-memory-closeout ~/.codex/skills/obsidian-memory-closeout
 ```
 
 Restart Codex after copying.
+
+## Graphify Integration
+
+Graphify support is optional and privacy-aware. The skill treats Markdown notes as the source of truth and Graphify output as a derived index that can be refreshed after curated notes are written.
+
+When `graphify` is installed, Codex can run:
+
+```bash
+python3 ~/.codex/skills/obsidian-memory-closeout/scripts/refresh_graphify.py /path/to/vault
+```
+
+Use `--html` if you also want a visual graph artifact:
+
+```bash
+python3 ~/.codex/skills/obsidian-memory-closeout/scripts/refresh_graphify.py /path/to/vault --html
+```
+
+The skill checks `.graphifyignore` before treating a vault as ready for indexing and should avoid indexing raw transcripts, private dumps, cache folders, and other sensitive source material. See [docs/GRAPHIFY.md](docs/GRAPHIFY.md) for setup, expected outputs, and privacy guardrails.
 
 ## Package
 
@@ -97,6 +116,7 @@ The validation checks that:
 - `SKILL.md` has valid frontmatter.
 - `agents/openai.yaml` exists and matches the skill metadata shape.
 - Referenced files exist.
+- Graphify runtime guidance is packaged with the skill.
 - Sanitized examples contain expected frontmatter.
 - Packaging produces a zip with the expected skill files.
 - The repository does not contain common secret-like patterns.

@@ -10,6 +10,7 @@ Use this checklist when reviewing the repository or preparing a release.
 - Longer optional workflows live in `references/`.
 - Every referenced file exists.
 - Scripts are deterministic and have been run locally.
+- Graphify guidance explains derived-index behavior and privacy boundaries.
 
 ## Repository Quality
 
@@ -18,6 +19,7 @@ Use this checklist when reviewing the repository or preparing a release.
 - `CONTRIBUTING.md` and `SECURITY.md` exist.
 - CI runs validation, secret scan, and packaging checks.
 - Release documentation explains how to build and attach the package.
+- Graphify setup and refresh behavior are documented in `docs/GRAPHIFY.md`.
 
 ## Privacy Quality
 

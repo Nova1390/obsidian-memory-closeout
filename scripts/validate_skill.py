@@ -22,12 +22,14 @@ REQUIRED_ROOT_FILES = (
     "SECURITY.md",
     "AGENTS.md",
     "LICENSE",
+    "docs/GRAPHIFY.md",
     ".github/workflows/validate.yml",
 )
 REQUIRED_SKILL_FILES = (
     "SKILL.md",
     "LICENSE.txt",
     "agents/openai.yaml",
+    "references/graphify.md",
     "references/memory-note-schema.md",
     "references/transcript-processing.md",
     "scripts/refresh_graphify.py",
@@ -130,6 +132,16 @@ def main() -> int:
     for rel in REQUIRED_SKILL_FILES:
         if not (skill_dir / rel).is_file():
             return fail(f"missing required file: {rel}")
+
+    graphify_docs = (
+        root / "README.md",
+        root / "docs" / "GRAPHIFY.md",
+        skill_dir / "references" / "graphify.md",
+    )
+    for path in graphify_docs:
+        content = path.read_text(encoding="utf-8")
+        if "Graphify" not in content or ".graphifyignore" not in content:
+            return fail(f"{path.relative_to(root)} should document Graphify and .graphifyignore")
 
     for example in sorted((root / "examples").glob("*.md")):
         error = validate_frontmatter_file(

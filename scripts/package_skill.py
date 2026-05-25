@@ -14,6 +14,7 @@ REQUIRED_FILES = {
     "SKILL.md",
     "LICENSE.txt",
     "agents/openai.yaml",
+    "references/graphify.md",
     "references/memory-note-schema.md",
     "references/transcript-processing.md",
     "scripts/refresh_graphify.py",

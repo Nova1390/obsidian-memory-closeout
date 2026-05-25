@@ -32,7 +32,7 @@ Before writing, inspect local conventions: `AGENTS.md`, `.gitignore`, `.graphify
    - Memory proposal when canonical placement is unclear.
 4. Use Obsidian links between related notes.
 5. Run a privacy scan before commit or handoff. Use `scripts/secret_scan.py` if helpful.
-6. Refresh Graphify when available. Use `scripts/refresh_graphify.py` if helpful.
+6. Refresh Graphify when available. Read `references/graphify.md`, then use `scripts/refresh_graphify.py` if helpful.
 7. If the vault is a Git repo, checkpoint meaningful memory changes.
 
 ## Transcript Handling
@@ -64,6 +64,8 @@ Every canonical note should have enough metadata to answer:
 Graphify is a derived index, not the source of truth. Markdown notes remain canonical.
 
 Refresh Graphify only after curated notes are written. Do not index raw transcript folders unless the user explicitly accepts that privacy tradeoff.
+
+Read `references/graphify.md` before setting up or refreshing Graphify.
 
 ## Failure Modes
 
