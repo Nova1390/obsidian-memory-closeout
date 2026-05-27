@@ -5,42 +5,43 @@
 [![Validate](https://github.com/Nova1390/obsidian-memory-closeout/actions/workflows/validate.yml/badge.svg)](https://github.com/Nova1390/obsidian-memory-closeout/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-`obsidian-memory-closeout` is a Codex skill for using an Obsidian-compatible vault as both input and output: query relevant memory before work, then ingest durable updates afterward.
+Turn meaningful work into curated Obsidian memory, and read that memory before acting.
 
-The skill is intentionally privacy-first: it guides Codex to write durable memory, not raw transcripts, secrets, credentials, or noisy command logs.
+`obsidian-memory-closeout` is a privacy-first skill for using an Obsidian-compatible vault as both input and output. It helps agents query existing memory before work, ingest durable updates afterward, and keep the vault useful without storing raw transcripts, secrets, credentials, or noisy logs.
 
 ## What It Does
 
-- Finds or asks for the target Obsidian vault.
 - Queries relevant existing notes, decisions, open loops, and references before work.
-- Extracts durable memory from a session, transcript, or completed task.
+- Ingests durable updates from a session, transcript, web clip, or completed task.
 - Writes concise session summaries, decisions, project updates, references, or inbox proposals.
 - Lints memory quality for schema, links, privacy, stale decisions, duplication, noise, and coverage gaps.
 - Reviews web clips as unreviewed inbox material before promoting them into canonical notes.
-- Uses the vault's existing conventions first, with a generic fallback schema.
+- Finds or asks for the target Obsidian vault and follows existing vault conventions first.
 - Runs a local secret scan before committing or handing off.
-- Refreshes Graphify-derived indexes when `graphify` is available.
+- Refreshes Graphify or other derived indexes without treating them as the source of truth.
 
-## Operating Model
+## Why This Exists
 
-The skill follows an `Ingest / Query / Lint` model for LLM-readable memory vaults:
+Raw transcripts are bad long-term memory. They are noisy, often mix durable decisions with drafting chatter, and can accidentally contain secrets or sensitive details. They are also hard to maintain because context, uncertainty, and outdated statements are difficult to separate later.
 
-1. **Query existing memory**: read relevant notes, decisions, open loops, and references before acting.
-2. **Do the work**: use current task context plus retrieved memory.
-3. **Ingest durable updates**: convert useful sources into curated notes such as decisions, session summaries, project updates, references, or proposals.
-4. **Lint memory quality**: check schema, links, privacy, stale decisions, duplicated or noisy notes, and coverage gaps.
+Memory also needs to be queried before work. A vault that is only written after the fact becomes an archive. A useful memory vault should inform the next action by surfacing project state, decisions, open loops, and references before the agent acts.
+
+This skill prefers curated closeouts: decisions, session summaries, project updates, references, and proposals that preserve useful context without storing unnecessary raw material.
+
+## Ingest / Query / Lint
+
+The skill follows a compact operating model for LLM-readable memory vaults:
+
+1. **Query**: read relevant notes, decisions, open loops, and references before acting.
+2. **Work**: use current task context plus retrieved memory.
+3. **Ingest**: convert useful sources into curated notes such as decisions, session summaries, project updates, references, or proposals.
+4. **Lint**: check schema, links, privacy, stale decisions, duplicated or noisy notes, and coverage gaps.
 
 Definitions:
 
-- **Ingest**: convert useful sources into curated Obsidian notes.
 - **Query**: read relevant existing memory before work.
+- **Ingest**: convert useful sources into curated Obsidian notes.
 - **Lint**: validate that memory remains useful, private, linked, current, and non-duplicative.
-
-## Why Not Raw Transcripts?
-
-Raw transcripts are noisy, often mix durable decisions with drafting chatter, and can accidentally contain secrets or sensitive details. They are also hard to maintain as reliable long-term memory because context, uncertainty, and outdated statements are difficult to separate later.
-
-This skill prefers curated closeouts: decisions, session summaries, project updates, and proposals that preserve useful context without storing unnecessary raw material.
 
 ## Web Clips And Inbox Review
 
@@ -57,6 +58,12 @@ Promotion criteria: durable beyond the moment, clear source URL/context, privacy
 Rejection criteria: one-off reading, full article dumps, private/account data, secrets or credentials, and low-quality or duplicate sources.
 
 See [docs/WEB_CLIPS.md](docs/WEB_CLIPS.md) and [examples/web-clip-review.md](examples/web-clip-review.md).
+
+## Derived Indexes And Graphify
+
+Markdown notes remain the source of truth. Graphify or other derived indexes can be refreshed after curated notes are written, but generated graph data should not replace canonical notes.
+
+When using Graphify, keep `.graphifyignore` privacy-aware and avoid indexing raw transcripts, private dumps, caches, and unreviewed web clips. See [docs/GRAPHIFY.md](docs/GRAPHIFY.md).
 
 ## Repository Layout
 
