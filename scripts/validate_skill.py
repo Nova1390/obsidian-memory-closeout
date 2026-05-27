@@ -24,6 +24,7 @@ REQUIRED_ROOT_FILES = (
     "LICENSE",
     "docs/GRAPHIFY.md",
     "docs/QUALITY_CHECKLIST.md",
+    "docs/WEB_CLIPS.md",
     ".github/workflows/validate.yml",
 )
 REQUIRED_SKILL_FILES = (
@@ -33,6 +34,7 @@ REQUIRED_SKILL_FILES = (
     "references/graphify.md",
     "references/memory-note-schema.md",
     "references/transcript-processing.md",
+    "references/web-clips.md",
     "scripts/refresh_graphify.py",
     "scripts/secret_scan.py",
 )
@@ -170,6 +172,23 @@ def main() -> int:
     )
     if result is not None:
         return result
+
+    web_clip_terms = (
+        "00_Inbox/Web Clips/raw",
+        "promotion criteria",
+        "rejection criteria",
+        "full article dump",
+        "clear source URL",
+    )
+    for rel in (
+        "README.md",
+        "docs/WEB_CLIPS.md",
+        "skill/obsidian-memory-closeout/references/web-clips.md",
+        "examples/web-clip-review.md",
+    ):
+        result = require_terms(root, rel, web_clip_terms)
+        if result is not None:
+            return result
 
     for example in sorted((root / "examples").glob("*.md")):
         error = validate_frontmatter_file(

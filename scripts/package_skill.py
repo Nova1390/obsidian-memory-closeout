@@ -17,6 +17,7 @@ REQUIRED_FILES = {
     "references/graphify.md",
     "references/memory-note-schema.md",
     "references/transcript-processing.md",
+    "references/web-clips.md",
     "scripts/refresh_graphify.py",
     "scripts/secret_scan.py",
 }

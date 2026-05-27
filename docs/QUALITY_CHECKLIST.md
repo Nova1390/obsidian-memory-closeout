@@ -12,6 +12,7 @@ Use this checklist when reviewing the repository or preparing a release.
 - Scripts are deterministic and have been run locally.
 - Graphify guidance explains derived-index behavior and privacy boundaries.
 - The skill treats memory as both input and output: Query before work, Ingest durable updates, and Lint quality before handoff.
+- Web clip guidance treats `00_Inbox/Web Clips/raw` as unreviewed source material, not canonical memory.
 
 ## Repository Quality
 
@@ -21,6 +22,7 @@ Use this checklist when reviewing the repository or preparing a release.
 - CI runs validation, secret scan, and packaging checks.
 - Release documentation explains how to build and attach the package.
 - Graphify setup and refresh behavior are documented in `docs/GRAPHIFY.md`.
+- Web clip inbox review is documented in `docs/WEB_CLIPS.md`.
 - README documents the `Ingest / Query / Lint` operating model with neutral placeholders.
 
 ## Privacy Quality
@@ -31,3 +33,4 @@ Use this checklist when reviewing the repository or preparing a release.
 - No personal absolute paths.
 - Examples are synthetic.
 - Lint guidance covers schema, links, privacy, stale decisions, duplication/noise, and coverage gaps.
+- Raw web clips are ignored by Git/indexing by default and promoted only after review.

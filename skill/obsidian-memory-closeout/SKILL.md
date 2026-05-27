@@ -30,6 +30,7 @@ When a vault is available before a task, read relevant existing memory before ac
 - Decision notes for active choices, rejected alternatives, and revisit dates.
 - Session notes for recent changes and unresolved open loops.
 - Reference notes for reusable technical or domain context.
+- Reviewed web clip proposals or inbox items, but not raw clipping dumps.
 - Proposal notes when canonical memory placement is still unresolved.
 
 Use the smallest useful context set. If no relevant memory exists, continue with the current task and note the coverage gap during linting.
@@ -63,6 +64,16 @@ Choose the smallest useful write:
 
 Use Obsidian links between related notes.
 
+### Web Clips
+
+Browser and web clippings are unreviewed source material, not canonical memory. Use this generic inbox convention when the vault has no existing one:
+
+```text
+00_Inbox/Web Clips/raw/
+```
+
+Raw clips should be ignored by Git and indexing by default. Review them before promotion. Read `references/web-clips.md` for promotion and rejection criteria.
+
 ### Lint
 
 Lint means validating memory quality before handoff. Check:
@@ -70,6 +81,7 @@ Lint means validating memory quality before handoff. Check:
 - Schema: required frontmatter exists and matches local templates.
 - Links: related notes are connected and broken links are avoided.
 - Privacy: no raw transcripts, secrets, credentials, or unnecessary sensitive details.
+- Web clips: raw clips are not treated as canonical notes and are excluded from Git/indexing when possible.
 - Stale decisions: active decisions with revisit dates or outdated assumptions are called out.
 - Duplication/noise: repeated, low-value, or overly broad notes are avoided.
 - Coverage gaps: missing project state, open loops, or references are noted.

@@ -16,6 +16,7 @@ The skill is intentionally privacy-first: it guides Codex to write durable memor
 - Extracts durable memory from a session, transcript, or completed task.
 - Writes concise session summaries, decisions, project updates, references, or inbox proposals.
 - Lints memory quality for schema, links, privacy, stale decisions, duplication, noise, and coverage gaps.
+- Reviews web clips as unreviewed inbox material before promoting them into canonical notes.
 - Uses the vault's existing conventions first, with a generic fallback schema.
 - Runs a local secret scan before committing or handing off.
 - Refreshes Graphify-derived indexes when `graphify` is available.
@@ -41,6 +42,22 @@ Raw transcripts are noisy, often mix durable decisions with drafting chatter, an
 
 This skill prefers curated closeouts: decisions, session summaries, project updates, and proposals that preserve useful context without storing unnecessary raw material.
 
+## Web Clips And Inbox Review
+
+Browser and web clippings are source material, not canonical memory. A generic inbox convention is:
+
+```text
+00_Inbox/Web Clips/raw/
+```
+
+Raw clips should be ignored by Git and indexing by default, then reviewed for promotion into curated notes. Promote a clip only when it is durable beyond the moment, has a clear source URL/context, is privacy-safe, can be summarized without storing the full raw content, and has a clear destination note. Reject one-off reading, full article dumps, private/account data, secrets or credentials, and low-quality or duplicate sources.
+
+Promotion criteria: durable beyond the moment, clear source URL/context, privacy-safe, summarizable without full raw content, and clear destination note.
+
+Rejection criteria: one-off reading, full article dumps, private/account data, secrets or credentials, and low-quality or duplicate sources.
+
+See [docs/WEB_CLIPS.md](docs/WEB_CLIPS.md) and [examples/web-clip-review.md](examples/web-clip-review.md).
+
 ## Repository Layout
 
 ```text
@@ -48,7 +65,7 @@ This skill prefers curated closeouts: decisions, session summaries, project upda
 ├── skill/obsidian-memory-closeout/   # Installable Codex skill package
 ├── examples/                         # Sanitized example outputs
 ├── assets/                           # Public repository images
-├── docs/                             # Graphify, release, and quality docs
+├── docs/                             # Graphify, web clip, release, and quality docs
 ├── scripts/                          # Repo validation and packaging helpers
 ├── .github/workflows/validate.yml     # CI validation
 ├── PRIVACY.md                        # Privacy model and public repo boundaries
