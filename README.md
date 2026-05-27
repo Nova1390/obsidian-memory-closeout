@@ -20,6 +20,15 @@ Turn meaningful work into curated Obsidian memory, and read that memory before a
 - Runs a local secret scan before committing or handing off.
 - Refreshes Graphify or other derived indexes without treating them as the source of truth.
 
+## What's New In v0.2.0
+
+- Proactive memory workflow: agents can decide when durable information should update memory instead of waiting for an explicit closeout request.
+- Generic **Before Work / During Work / Closeout** loop for reading memory, tracking durable changes, and writing curated summaries.
+- Optional derived graph/index refreshes that use the vault's documented workflow instead of hardcoded setup.
+- Stronger deletion and staging guardrails before committing memory changes.
+- Better web clip review guidance for promoting only durable summaries from inbox source material.
+- Public safety audit checks for private paths, secrets, raw transcript markers, and non-synthetic examples.
+
 ## Why This Exists
 
 Raw transcripts are bad long-term memory. They are noisy, often mix durable decisions with drafting chatter, and can accidentally contain secrets or sensitive details. They are also hard to maintain because context, uncertainty, and outdated statements are difficult to separate later.
