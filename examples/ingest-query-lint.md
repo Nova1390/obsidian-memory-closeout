@@ -17,31 +17,49 @@ This synthetic example shows how an agent can use an Obsidian-compatible vault a
 
 ## 1. Query Existing Memory
 
-Input:
+User request:
 
 ```text
-Use /path/to/vault. Before working on Project Alpha, query relevant memory notes, decisions, open loops, and references.
+Use /path/to/vault. Continue work on Project Alpha. Before changing Example App notification settings, query relevant project notes, decisions, open loops, and references.
 ```
 
-Relevant existing notes:
+Relevant existing project note:
 
 ```markdown
 [[Project Alpha]]
-- Current state: Example App has a basic notification settings screen.
-- Next action: Decide the default notification cadence.
+current_state: Example App has a basic notification settings screen.
+next_actions:
+  - Align documentation and tests with the active notification cadence decision.
+  - Keep unresolved daily alert opt-in work visible.
+```
 
+Relevant decision:
+
+```markdown
 [[Decision Notification Cadence]]
-- Status: active
-- Current decision: weekly summaries are preferred over daily summaries.
-- Revisit after: 2026-04-15
+status: active
+decision: Weekly summaries are preferred over daily summaries.
+revisit_after: 2026-04-15
+```
 
+Relevant reference:
+
+```markdown
+[[Reference Notification Patterns]]
+summary: Notification defaults should be predictable and easy to override.
+source: https://example.org/reference/notification-patterns
+```
+
+Relevant open loop:
+
+```markdown
 [[Open Loops]]
 - Confirm whether daily alerts should be available as an opt-in.
 ```
 
 ## 2. Do The Work
 
-The agent updates Example App documentation and tests using the retrieved memory. It keeps the weekly-summary decision in scope and does not reintroduce daily summaries as the default.
+The agent updates Example App documentation and tests using the retrieved memory. It keeps the weekly-summary decision in scope, references the notification pattern note, and does not reintroduce daily summaries as the default.
 
 ## 3. Ingest Durable Updates
 
@@ -86,6 +104,7 @@ Example App documentation and tests were updated to align with the active decisi
 
 - [[Project Alpha]]
 - [[Decision Notification Cadence]]
+- [[Reference Notification Patterns]]
 ```
 
 ## 4. Lint Memory Quality

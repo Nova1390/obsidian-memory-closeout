@@ -8,102 +8,120 @@ confidence: high
 source: synthetic-example
 tags:
   - memory/example
-  - privacy/transcripts
+  - workflow/query-ingest-lint
 ---
 
-# Before/After: AI Session Closeout
+# Before/After: Continue Existing Project
 
-This example is fully synthetic. It shows the intended transformation from a short, noisy AI session into curated Obsidian memory. The raw transcript is not saved.
+This example is fully synthetic. It shows how an agent uses memory as both input and output: first reading relevant notes, then doing the work, then writing only durable updates. The raw transcript is not saved.
 
-## Before: Session Input
+## Before: User Request
 
 ```text
-User: We changed the notification settings plan. Let's default to weekly summaries.
-Assistant: Got it. I can update the docs and tests.
-User: Also, ignore my earlier idea about daily summaries. Too noisy.
-Assistant: Should the old rollout note be updated?
-User: Yes. Add a follow-up to check whether users can opt into daily alerts later.
+Use /path/to/vault. Continue work on Project Meridian and finish the notification preferences cleanup for Example App. Read relevant memory first, then update durable memory afterward.
 ```
 
-## After: Curated Obsidian Notes
+## Agent First Reads Existing Memory
 
-### Session Summary
+Relevant existing project note:
+
+```markdown
+[[Project Meridian]]
+current_state: Example App has notification preferences split across two settings panels.
+next_actions:
+  - Consolidate notification preferences into one settings panel.
+  - Keep weekly summaries as the default cadence.
+```
+
+Relevant decision:
+
+```markdown
+[[Decision Weekly Summary Default]]
+decision: Weekly summaries are the default notification cadence.
+reason: Daily notifications are too noisy for the default experience.
+status: active
+```
+
+Relevant reference:
+
+```markdown
+[[Reference Settings Panel Patterns]]
+summary: Group related preferences together and avoid duplicate controls across panels.
+source: https://example.org/reference/settings-panel-patterns
+```
+
+Relevant open loop:
+
+```markdown
+[[Open Loops]]
+- Decide whether daily notifications should be offered as an advanced opt-in later.
+```
+
+## Work Performed
+
+The agent consolidates notification preferences into one settings panel for Example App, keeps weekly summaries as the default, and removes duplicate preference wording from the draft documentation.
+
+## After: Curated Memory Updates
+
+### Session Closeout
 
 ```markdown
 ---
-id: session-2026-01-15-notification-settings
+id: session-2026-01-15-project-meridian-notification-cleanup
 type: session
 status: complete
 created: 2026-01-15
 updated: 2026-01-15
 confidence: high
-source: synthetic-ai-session
+source: synthetic-agent-session
 tags:
   - memory/session
-  - project/notifications
-summary: Notification settings were clarified around weekly summaries.
+  - project/project-meridian
+summary: Notification preferences were consolidated for Example App.
 memory_updates:
-  - Weekly summaries are the default notification cadence.
-  - Daily summaries are no longer the default direction.
+  - Example App now has one notification preferences panel.
+  - Weekly summaries remain the default notification cadence.
 open_loops:
-  - Evaluate whether users should be able to opt into daily alerts later.
+  - Decide whether daily notifications should be offered as an advanced opt-in later.
 ---
 
-# Notification Settings Session
+# Project Meridian Notification Cleanup
 
 ## Summary
 
-The notification settings plan now defaults to weekly summaries. A previous daily-summary direction was rejected because it would create too much noise.
+Notification preferences for Example App were consolidated into one settings panel. The active decision to keep weekly summaries as the default cadence remains unchanged.
 
-## Memory Updates
+## Durable Updates
 
-- Weekly summaries are the default cadence.
-- Daily summaries may be reconsidered only as an optional user opt-in.
+- One notification preferences panel now owns notification cadence settings.
+- Duplicate preference wording was removed from draft documentation.
+- Weekly summaries remain the default cadence.
 
 ## Open Loops
 
-- Check whether daily alerts should be exposed as an opt-in setting.
+- Decide whether daily notifications should be offered as an advanced opt-in later.
+
+## Links
+
+- [[Project Meridian]]
+- [[Decision Weekly Summary Default]]
+- [[Reference Settings Panel Patterns]]
 ```
 
-### Decision Note
+### Project Note Update
+
+Only durable state is updated:
 
 ```markdown
----
-id: decision-weekly-notification-summary-default
-type: decision
-status: active
-created: 2026-01-15
-updated: 2026-01-15
-confidence: high
-source: synthetic-ai-session
-tags:
-  - memory/decision
-  - project/notifications
-decision: Default notification summaries to weekly.
-alternatives:
-  - Daily summaries by default.
-reason: Weekly summaries reduce notification noise while preserving useful updates.
----
-
-# Weekly Notification Summary Default
-
-## Decision
-
-Notification summaries default to weekly.
-
-## Reason
-
-Daily summaries were considered too noisy for the default experience.
-
-## Consequences
-
-- Documentation should describe weekly summaries as the default.
-- Daily alerts remain a possible future opt-in.
+[[Project Meridian]]
+current_state: Example App has one consolidated notification preferences panel.
+next_actions:
+  - Decide whether daily notifications should be offered as an advanced opt-in later.
 ```
 
 ## What Was Not Saved
 
-- The raw back-and-forth transcript.
+- The raw user-agent transcript.
 - Drafting chatter.
-- Repeated confirmations.
-- Any unnecessary session noise.
+- Temporary implementation notes.
+- Duplicate wording that no longer matters.

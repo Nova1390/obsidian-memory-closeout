@@ -190,6 +190,20 @@ def main() -> int:
         if result is not None:
             return result
 
+    example_memory_terms = (
+        "Agent First Reads Existing Memory",
+        "Relevant existing project note",
+        "Relevant decision",
+        "Relevant reference",
+        "Relevant open loop",
+        "Work Performed",
+        "Session Closeout",
+        "Only durable state is updated",
+    )
+    result = require_terms(root, "examples/before-after.md", example_memory_terms)
+    if result is not None:
+        return result
+
     for example in sorted((root / "examples").glob("*.md")):
         error = validate_frontmatter_file(
             example,
