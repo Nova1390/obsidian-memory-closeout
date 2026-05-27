@@ -13,8 +13,17 @@ SKILL_NAME = "obsidian-memory-closeout"
 FRONTMATTER_RE = re.compile(r"\A---\n(?P<body>.*?)\n---\n", re.DOTALL)
 PRIVATE_PATH_PATTERNS = [
     re.compile("/" + "Users" + r"/[^/\s]+"),
+    re.compile("/" + "home" + r"/[^/\s]+"),
+    re.compile(r"[A-Za-z]:\\Users\\[^\\\s]+"),
     re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b"),
 ]
+PUBLIC_SAFETY_PATTERNS = {
+    "raw transcript marker": re.compile(r"(?m)^(User|Assistant|Human|Agent|System):\s+"),
+    "private key": re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----"),
+    "openai key": re.compile(r"\bsk-[A-Za-z0-9_-]{20,}"),
+    "github token": re.compile(r"\bgh[pousr]_[A-Za-z0-9_]{20,}"),
+    "aws access key": re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
+}
 REQUIRED_ROOT_FILES = (
     "README.md",
     "PRIVACY.md",
@@ -89,6 +98,22 @@ def require_terms(root: pathlib.Path, rel: str, terms: tuple[str, ...]) -> int |
     return None
 
 
+def validate_public_safety(root: pathlib.Path) -> int | None:
+    detector_files = {
+        pathlib.Path("scripts/validate_skill.py"),
+        pathlib.Path("skill/obsidian-memory-closeout/scripts/secret_scan.py"),
+    }
+    for path in iter_public_text_files(root):
+        rel = path.relative_to(root)
+        if rel in detector_files:
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for name, pattern in PUBLIC_SAFETY_PATTERNS.items():
+            if pattern.search(text):
+                return fail(f"{rel} contains public-safety finding: {name}")
+    return None
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", default=".", help="Repository root")
@@ -127,6 +152,10 @@ def main() -> int:
             if pattern.search(file_text):
                 rel = path.relative_to(root)
                 return fail(f"{rel} contains private-looking text matching {pattern.pattern}")
+
+    result = validate_public_safety(root)
+    if result is not None:
+        return result
 
     if not agents_yaml.is_file():
         return fail("missing agents/openai.yaml")
@@ -201,6 +230,21 @@ def main() -> int:
         "Only durable state is updated",
     )
     result = require_terms(root, "examples/before-after.md", example_memory_terms)
+    if result is not None:
+        return result
+
+    result = require_terms(
+        root,
+        "CONTRIBUTING.md",
+        (
+            "public safety audit",
+            "synthetic and privacy-safe",
+            "Personal names",
+            "private filesystem paths",
+            "Raw transcript-like content",
+            "committing sensitive memory",
+        ),
+    )
     if result is not None:
         return result
 

@@ -11,6 +11,19 @@ Thanks for improving `obsidian-memory-closeout`.
 - Test scripts by running them locally.
 - Keep examples synthetic and privacy-safe.
 
+## Maintainer Privacy Note
+
+Before opening a pull request or publishing a release, run a public safety audit. Examples and docs must remain synthetic and privacy-safe.
+
+Do not include:
+
+- Personal names, private repo names, private vault names, or private filesystem paths.
+- Real secrets, tokens, credentials, private keys, or account data.
+- Raw transcript-like content, full chat logs, full article dumps, or noisy source archives.
+- Examples that imply committing sensitive memory to Git or indexing raw private material.
+
+Use neutral placeholders such as `/path/to/vault`, `Project Alpha`, and `Example App`.
+
 ## Local Checks
 
 Run:
