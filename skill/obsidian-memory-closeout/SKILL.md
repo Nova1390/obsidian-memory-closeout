@@ -1,6 +1,6 @@
 ---
 name: obsidian-memory-closeout
-description: Query existing Obsidian memory before work, then ingest curated closeouts, proposals, decisions, project updates, lint findings, and Graphify refreshes afterward. Use when the user asks to use an Obsidian-compatible vault as durable AI memory, summarize sessions or transcripts into notes, maintain project memory, inspect open loops, validate memory quality, or keep Graphify in sync without storing raw logs or secrets.
+description: Query existing Obsidian memory before work, then proactively ingest curated closeouts, proposals, decisions, project updates, web clip reviews, lint findings, and optional derived graph/index refreshes afterward. Use when the user asks to use an Obsidian-compatible vault as durable AI memory, summarize sessions or transcripts into notes, maintain project memory, inspect open loops, review web clips, validate memory quality, or refresh documented derived indexes without storing raw logs or secrets.
 ---
 
 # Obsidian Memory Closeout
@@ -9,7 +9,9 @@ description: Query existing Obsidian memory before work, then ingest curated clo
 
 Memory is both input and output. Query relevant existing notes before acting, then write durable, curated updates into an Obsidian-compatible Markdown vault after useful work happens.
 
-Do not store raw transcripts, secrets, credentials, or noisy command logs. Prefer explicit notes, traceable sources, and small updates over archival dumps.
+Do not wait for the user to explicitly ask for memory updates when durable information emerges and a vault path or memory contract is available. Proactively decide whether to update an existing note, write a curated note, create a decision, create a session summary, or leave a proposal.
+
+Do not store raw transcripts, secrets, credentials, sensitive claims, unnecessary personal details, or noisy command logs. Prefer explicit notes, traceable sources, and small updates over archival dumps.
 
 ## Locate The Vault
 
@@ -22,10 +24,13 @@ Use the first available source:
 
 Before querying or writing, inspect local conventions: `AGENTS.md`, `.gitignore`, `.graphifyignore`, templates, and existing note structure.
 
-## Before Work / Query
+## Before Work / During Work / Closeout
 
-When a vault is available before a task, read relevant existing memory before acting. Search or inspect:
+### Before Work / Query
 
+When a vault path or memory contract is available before meaningful work, read relevant existing memory before acting. Search or inspect:
+
+- Dashboard or index notes for orientation and active areas.
 - Project and area notes for current state, goals, constraints, and next actions.
 - Decision notes for active choices, rejected alternatives, and revisit dates.
 - Session notes for recent changes and unresolved open loops.
@@ -34,6 +39,32 @@ When a vault is available before a task, read relevant existing memory before ac
 - Proposal notes when canonical memory placement is still unresolved.
 
 Use the smallest useful context set. If no relevant memory exists, continue with the current task and note the coverage gap during linting.
+
+### During Work
+
+Track durable candidates as they emerge:
+
+- Facts that will matter later.
+- Decisions and rejected alternatives.
+- Project state changes.
+- Resolved or new open loops.
+- Stable user/team preferences.
+- Reusable references and source URLs.
+
+Keep this as working context. Do not save noisy intermediate reasoning, raw transcripts, secrets, credentials, or unnecessary sensitive details.
+
+### Closeout
+
+At natural stopping points, write only curated durable summaries:
+
+- Update existing notes when the canonical destination is clear.
+- Create a decision note for a durable choice.
+- Create a session summary for what changed.
+- Create a project or area update for durable state.
+- Create a reference note for reusable source material.
+- Leave a proposal when placement or confidence is unclear.
+
+Then lint memory quality, run configured checks, and refresh documented derived indexes or graphs when available.
 
 ## Operating Model
 
@@ -72,7 +103,7 @@ Browser and web clippings are unreviewed source material, not canonical memory. 
 00_Inbox/Web Clips/raw/
 ```
 
-Raw clips should be ignored by Git and indexing by default. Review them before promotion. Read `references/web-clips.md` for promotion and rejection criteria.
+Raw clips should be ignored by Git and indexing by default. Promote only durable summaries. Leave ambiguous clips pending with a reason. Do not commit full clipped articles unless the user explicitly wants that and copyright/privacy policy allows it. Read `references/web-clips.md` for promotion and rejection criteria.
 
 ### Lint
 
@@ -86,7 +117,7 @@ Lint means validating memory quality before handoff. Check:
 - Duplication/noise: repeated, low-value, or overly broad notes are avoided.
 - Coverage gaps: missing project state, open loops, or references are noted.
 
-Run a privacy scan before commit or handoff. Use `scripts/secret_scan.py` if helpful. Refresh Graphify when available. Read `references/graphify.md`, then use `scripts/refresh_graphify.py` if helpful. If the vault is a Git repo, checkpoint meaningful memory changes.
+Run a privacy scan before commit or handoff. Use `scripts/secret_scan.py` if helpful. If the vault is a Git repo, checkpoint meaningful memory changes only after staging is reviewed.
 
 ## Transcript Handling
 
@@ -112,17 +143,29 @@ Every canonical note should have enough metadata to answer:
 - When was it last updated?
 - What notes does it connect to?
 
-## Graphify
+## Derived Graph Outputs
 
-Graphify is a derived index, not the source of truth. Markdown notes remain canonical.
+Some vaults maintain derived graph, search, or index artifacts. Markdown notes remain canonical.
 
-Refresh Graphify only after curated notes are written. Do not index raw transcript folders unless the user explicitly accepts that privacy tradeoff.
+- Run the vault's documented refresh command if one exists.
+- Do not invent graph/index commands when the vault has no documented workflow.
+- If derived outputs are expected, verify they were regenerated and include them in quality checks.
+- Do not treat Graphify, any knowledge graph tool, or any private output path as mandatory for every vault.
+- Do not index raw transcript folders, unreviewed web clips, caches, secrets, or private dumps unless the documented workflow explicitly allows it.
 
-Read `references/graphify.md` before setting up or refreshing Graphify.
+Read `references/graphify.md` only when the vault documents Graphify or the user asks for it.
+
+## Safety and Deletion Guardrails
+
+- Never perform mass deletion of memory vault content.
+- Never delete raw sources unless the vault's documented workflow explicitly says to archive or move them.
+- Stop before committing if unexpected deletions are staged.
+- Stop before committing if raw transcripts, caches, secrets, credentials, or unrelated files are staged.
+- Report uncertain staging state instead of guessing.
 
 ## Failure Modes
 
 - If the vault path is unknown, ask instead of guessing.
 - If the write would require storing sensitive material, summarize at a safer abstraction or refuse that part.
-- If Graphify is unavailable, leave notes updated and mention that the derived index was not refreshed.
+- If a derived graph/index refresh is unavailable, leave notes updated and mention that derived outputs were not refreshed.
 - If direct canonical writing is risky, create a memory proposal in the inbox or provide the proposal text to the user.

@@ -197,7 +197,46 @@ def main() -> int:
     result = require_terms(
         root,
         "skill/obsidian-memory-closeout/SKILL.md",
-        ("Before Work / Query", "schema", "links", "privacy", "stale decisions", "coverage gaps"),
+        (
+            "Before Work / During Work / Closeout",
+            "Before Work / Query",
+            "During Work",
+            "Closeout",
+            "proactively decide",
+            "schema",
+            "links",
+            "privacy",
+            "stale decisions",
+            "coverage gaps",
+        ),
+    )
+    if result is not None:
+        return result
+
+    result = require_terms(
+        root,
+        "skill/obsidian-memory-closeout/SKILL.md",
+        (
+            "Derived Graph Outputs",
+            "documented refresh command",
+            "Do not invent graph/index commands",
+            "verify they were regenerated",
+            "not treat Graphify",
+        ),
+    )
+    if result is not None:
+        return result
+
+    result = require_terms(
+        root,
+        "skill/obsidian-memory-closeout/SKILL.md",
+        (
+            "Safety and Deletion Guardrails",
+            "Never perform mass deletion",
+            "Never delete raw sources",
+            "unexpected deletions are staged",
+            "raw transcripts, caches, secrets, credentials, or unrelated files are staged",
+        ),
     )
     if result is not None:
         return result
@@ -218,6 +257,18 @@ def main() -> int:
         result = require_terms(root, rel, web_clip_terms)
         if result is not None:
             return result
+
+    result = require_terms(
+        root,
+        "skill/obsidian-memory-closeout/SKILL.md",
+        (
+            "Promote only durable summaries",
+            "Leave ambiguous clips pending with a reason",
+            "Do not commit full clipped articles",
+        ),
+    )
+    if result is not None:
+        return result
 
     example_memory_terms = (
         "Agent First Reads Existing Memory",

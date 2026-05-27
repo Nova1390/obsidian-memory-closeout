@@ -1,4 +1,4 @@
 interface:
   display_name: "Obsidian Memory Closeout"
-  short_description: "Curated Obsidian memory closeouts"
-  default_prompt: "Query relevant memory in my Obsidian vault before work, then ingest durable updates, lint memory quality, and refresh Graphify if available."
+  short_description: "Query, ingest, and lint Obsidian memory"
+  default_prompt: "Query relevant memory in my Obsidian vault before work, then proactively ingest durable updates, lint memory quality, review web clips if relevant, and refresh documented derived indexes if available."

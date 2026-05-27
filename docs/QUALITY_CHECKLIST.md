@@ -12,6 +12,8 @@ Use this checklist when reviewing the repository or preparing a release.
 - Scripts are deterministic and have been run locally.
 - Graphify guidance explains derived-index behavior and privacy boundaries.
 - The skill treats memory as both input and output: Query before work, Ingest durable updates, and Lint quality before handoff.
+- The skill has a generic Before Work / During Work / Closeout workflow.
+- Derived graph/index refreshes are optional and use documented vault commands rather than hardcoded private setup.
 - Web clip guidance treats `00_Inbox/Web Clips/raw` as unreviewed source material, not canonical memory.
 
 ## Repository Quality
@@ -34,3 +36,4 @@ Use this checklist when reviewing the repository or preparing a release.
 - Examples are synthetic.
 - Lint guidance covers schema, links, privacy, stale decisions, duplication/noise, and coverage gaps.
 - Raw web clips are ignored by Git/indexing by default and promoted only after review.
+- Deletion and staging guardrails stop commits with unexpected deletions, raw transcripts, caches, secrets, or unrelated files.
