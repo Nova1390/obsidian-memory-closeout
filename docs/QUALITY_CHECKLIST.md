@@ -11,6 +11,7 @@ Use this checklist when reviewing the repository or preparing a release.
 - Every referenced file exists.
 - Scripts are deterministic and have been run locally.
 - Graphify guidance explains derived-index behavior and privacy boundaries.
+- The skill treats memory as both input and output: Query before work, Ingest durable updates, and Lint quality before handoff.
 
 ## Repository Quality
 
@@ -20,6 +21,7 @@ Use this checklist when reviewing the repository or preparing a release.
 - CI runs validation, secret scan, and packaging checks.
 - Release documentation explains how to build and attach the package.
 - Graphify setup and refresh behavior are documented in `docs/GRAPHIFY.md`.
+- README documents the `Ingest / Query / Lint` operating model with neutral placeholders.
 
 ## Privacy Quality
 
@@ -28,3 +30,4 @@ Use this checklist when reviewing the repository or preparing a release.
 - No credentials or tokens.
 - No personal absolute paths.
 - Examples are synthetic.
+- Lint guidance covers schema, links, privacy, stale decisions, duplication/noise, and coverage gaps.

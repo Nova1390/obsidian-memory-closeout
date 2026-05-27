@@ -23,6 +23,7 @@ REQUIRED_ROOT_FILES = (
     "AGENTS.md",
     "LICENSE",
     "docs/GRAPHIFY.md",
+    "docs/QUALITY_CHECKLIST.md",
     ".github/workflows/validate.yml",
 )
 REQUIRED_SKILL_FILES = (
@@ -76,6 +77,14 @@ def iter_public_text_files(root: pathlib.Path) -> list[pathlib.Path]:
         if path.is_file() and (path.suffix.lower() in suffixes or path.name in {"LICENSE", ".gitignore"}):
             files.append(path)
     return files
+
+
+def require_terms(root: pathlib.Path, rel: str, terms: tuple[str, ...]) -> int | None:
+    text = (root / rel).read_text(encoding="utf-8").lower()
+    for term in terms:
+        if term.lower() not in text:
+            return fail(f"{rel} missing required term: {term}")
+    return None
 
 
 def main() -> int:
@@ -142,6 +151,25 @@ def main() -> int:
         content = path.read_text(encoding="utf-8")
         if "Graphify" not in content or ".graphifyignore" not in content:
             return fail(f"{path.relative_to(root)} should document Graphify and .graphifyignore")
+
+    operating_model_terms = ("Ingest", "Query", "Lint")
+    for rel in (
+        "README.md",
+        "skill/obsidian-memory-closeout/SKILL.md",
+        "docs/QUALITY_CHECKLIST.md",
+        "examples/ingest-query-lint.md",
+    ):
+        result = require_terms(root, rel, operating_model_terms)
+        if result is not None:
+            return result
+
+    result = require_terms(
+        root,
+        "skill/obsidian-memory-closeout/SKILL.md",
+        ("Before Work / Query", "schema", "links", "privacy", "stale decisions", "coverage gaps"),
+    )
+    if result is not None:
+        return result
 
     for example in sorted((root / "examples").glob("*.md")):
         error = validate_frontmatter_file(

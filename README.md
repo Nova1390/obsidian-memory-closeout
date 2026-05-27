@@ -5,18 +5,35 @@
 [![Validate](https://github.com/Nova1390/obsidian-memory-closeout/actions/workflows/validate.yml/badge.svg)](https://github.com/Nova1390/obsidian-memory-closeout/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-`obsidian-memory-closeout` is a Codex skill for turning meaningful work sessions, transcripts, decisions, and project updates into curated Markdown notes for an Obsidian-compatible vault.
+`obsidian-memory-closeout` is a Codex skill for using an Obsidian-compatible vault as both input and output: query relevant memory before work, then ingest durable updates afterward.
 
 The skill is intentionally privacy-first: it guides Codex to write durable memory, not raw transcripts, secrets, credentials, or noisy command logs.
 
 ## What It Does
 
 - Finds or asks for the target Obsidian vault.
-- Extracts durable memory from a session or transcript.
+- Queries relevant existing notes, decisions, open loops, and references before work.
+- Extracts durable memory from a session, transcript, or completed task.
 - Writes concise session summaries, decisions, project updates, references, or inbox proposals.
+- Lints memory quality for schema, links, privacy, stale decisions, duplication, noise, and coverage gaps.
 - Uses the vault's existing conventions first, with a generic fallback schema.
 - Runs a local secret scan before committing or handing off.
 - Refreshes Graphify-derived indexes when `graphify` is available.
+
+## Operating Model
+
+The skill follows an `Ingest / Query / Lint` model for LLM-readable memory vaults:
+
+1. **Query existing memory**: read relevant notes, decisions, open loops, and references before acting.
+2. **Do the work**: use current task context plus retrieved memory.
+3. **Ingest durable updates**: convert useful sources into curated notes such as decisions, session summaries, project updates, references, or proposals.
+4. **Lint memory quality**: check schema, links, privacy, stale decisions, duplicated or noisy notes, and coverage gaps.
+
+Definitions:
+
+- **Ingest**: convert useful sources into curated Obsidian notes.
+- **Query**: read relevant existing memory before work.
+- **Lint**: validate that memory remains useful, private, linked, current, and non-duplicative.
 
 ## Why Not Raw Transcripts?
 
@@ -142,15 +159,23 @@ After installing, ask Codex something like:
 Create a curated memory closeout for this session in my Obsidian vault.
 ```
 
+For before-work memory lookup:
+
+```text
+Use /path/to/vault. Before working on Project Alpha, query relevant memory notes, decisions, open loops, and references. After the work, ingest durable updates and lint memory quality.
+```
+
 You can also provide a vault path explicitly:
 
 ```text
-Use /path/to/my/vault and create a memory closeout for this transcript.
+Use /path/to/vault and create a memory closeout for this transcript.
 ```
 
 ## Examples
 
 See [examples/before-after.md](examples/before-after.md) for a minimal synthetic before/after showing how a noisy AI session input becomes curated Obsidian notes without storing the raw transcript.
+
+See [examples/ingest-query-lint.md](examples/ingest-query-lint.md) for the full generic workflow: query existing memory, do the work, ingest durable updates, then lint memory quality.
 
 ## Privacy
 
