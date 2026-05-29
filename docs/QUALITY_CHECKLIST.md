@@ -16,6 +16,7 @@ Use this checklist when reviewing the repository or preparing a release.
 - Derived graph/index refreshes are optional and use documented vault commands rather than hardcoded private setup.
 - Web clip guidance treats `00_Inbox/Web Clips/raw` as unreviewed source material, not canonical memory.
 - Significant read receipts must close the loop with a curated update, proposal, or explicit no-durable-change marker.
+- Checked memory edits use direct writes only for low-risk updates and patch proposals for risky or review-worthy canonical changes.
 
 ## Repository Quality
 
@@ -39,3 +40,4 @@ Use this checklist when reviewing the repository or preparing a release.
 - Raw web clips are ignored by Git/indexing by default and promoted only after review.
 - Deletion and staging guardrails stop commits with unexpected deletions, raw transcripts, caches, secrets, or unrelated files.
 - Verification guidance includes local checks, supported graph/index refresh, Git status inspection, focused staging, and checkpoint commits when appropriate.
+- Patch proposals validate target existence, content hash freshness, required structure, and privacy before safe apply.

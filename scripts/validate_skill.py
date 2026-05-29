@@ -40,6 +40,7 @@ REQUIRED_SKILL_FILES = (
     "SKILL.md",
     "LICENSE.txt",
     "agents/openai.yaml",
+    "references/checked-memory-edits.md",
     "references/graphify.md",
     "references/memory-note-schema.md",
     "references/transcript-processing.md",
@@ -209,6 +210,33 @@ def main() -> int:
             "stale decisions",
             "coverage gaps",
         ),
+    )
+    if result is not None:
+        return result
+
+    checked_edit_terms = (
+        "Checked Memory Edits",
+        "Obsidian Markdown remains the canonical source of truth",
+        "patch proposal",
+        "Target content hash",
+        "Append to an existing section",
+        "Update one existing frontmatter field",
+        "Add one wikilink to `Links`",
+        "Excluded operations",
+        "Safe apply",
+    )
+    for rel in (
+        "skill/obsidian-memory-closeout/SKILL.md",
+        "skill/obsidian-memory-closeout/references/checked-memory-edits.md",
+    ):
+        result = require_terms(root, rel, checked_edit_terms)
+        if result is not None:
+            return result
+
+    result = require_terms(
+        root,
+        "docs/QUALITY_CHECKLIST.md",
+        ("Checked memory edits", "patch proposals", "content hash freshness", "safe apply"),
     )
     if result is not None:
         return result

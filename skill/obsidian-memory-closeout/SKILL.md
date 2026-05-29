@@ -62,6 +62,7 @@ At natural stopping points, write only curated durable summaries:
 - Create a session summary for what changed.
 - Create a project or area update for durable state.
 - Create a reference note for reusable source material.
+- Create a patch proposal when the canonical target note is clear but direct writing is risky or review-worthy.
 - Leave a proposal when placement or confidence is unclear.
 
 Then lint memory quality, run configured checks, and refresh documented derived indexes or graphs when available.
@@ -112,6 +113,38 @@ Choose the smallest useful write:
 - Memory proposal when canonical placement is unclear.
 
 Use Obsidian links between related notes.
+
+### Checked Memory Edits
+
+Obsidian Markdown remains the canonical source of truth. Prefer direct edits only for small, obvious, low-risk canonical updates.
+
+When the target note is clear but the edit is risky, concurrent, stale-prone, or review-worthy, create a patch proposal instead of editing directly. Read `references/checked-memory-edits.md`.
+
+Patch proposal fields:
+
+- `type` and `status`.
+- Target note/path.
+- Target content hash.
+- Operation.
+- `created`, `updated`, and `source`.
+- Proposed change.
+
+Allowed v1 operations:
+
+- Append to an existing section.
+- Update one existing frontmatter field.
+- Add one wikilink to `Links`.
+
+Excluded operations:
+
+- Delete.
+- Rename.
+- Multi-file rewrite.
+- Whole-note replacement.
+
+Validate target existence, hash freshness, required section/frontmatter presence, and absence of secrets/raw transcripts. Safe apply only validated small patches and mark the proposal applied/closed.
+
+Example CLI names such as `memory-patch validate` or `memory-patch apply` are placeholders, not required implementations.
 
 ### Web Clips
 
