@@ -16,6 +16,7 @@ Turn meaningful work into curated Obsidian memory, and read that memory before a
 - Writes concise session summaries, decisions, project updates, references, or inbox proposals.
 - Lints memory quality for schema, links, privacy, stale decisions, duplication, noise, and coverage gaps.
 - Reviews web clips as unreviewed inbox material before promoting them into canonical notes.
+- Uses checked patch proposals when a canonical memory edit is clear but direct writing is risky or review-worthy.
 - Finds or asks for the target Obsidian vault and follows existing vault conventions first.
 - Runs a local secret scan before committing or handing off.
 - Refreshes Graphify or other derived indexes without treating them as the source of truth.
@@ -28,6 +29,14 @@ Turn meaningful work into curated Obsidian memory, and read that memory before a
 - Stronger deletion and staging guardrails before committing memory changes.
 - Better web clip review guidance for promoting only durable summaries from inbox source material.
 - Public safety audit checks for private paths, secrets, raw transcript markers, and non-synthetic examples.
+
+## Checked Memory Edits
+
+Obsidian Markdown remains the canonical source of truth. Direct edits are best for small, obvious, low-risk canonical updates.
+
+When the target note is clear but the edit is risky, concurrent, stale-prone, or review-worthy, the skill uses a patch proposal instead of editing directly. Patch proposals include the target note/path, target content hash, operation, metadata, and proposed change.
+
+Allowed v1 operations are intentionally small: append to an existing section, update one existing frontmatter field, or add one wikilink to `Links`. Deletions, renames, multi-file rewrites, and whole-note replacements are excluded. See [skill/obsidian-memory-closeout/references/checked-memory-edits.md](skill/obsidian-memory-closeout/references/checked-memory-edits.md).
 
 ## Why This Exists
 
@@ -180,6 +189,7 @@ The validation checks that:
 - `agents/openai.yaml` exists and matches the skill metadata shape.
 - Referenced files exist.
 - Graphify runtime guidance is packaged with the skill.
+- Checked memory edit guidance is packaged with the skill.
 - Sanitized examples contain expected frontmatter.
 - Packaging produces a zip with the expected skill files.
 - The repository does not contain common secret-like patterns.

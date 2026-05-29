@@ -243,6 +243,28 @@ def main() -> int:
 
     result = require_terms(
         root,
+        "README.md",
+        (
+            "Checked Memory Edits",
+            "Obsidian Markdown remains the canonical source of truth",
+            "patch proposal",
+            "Allowed v1 operations",
+            "whole-note replacements are excluded",
+        ),
+    )
+    if result is not None:
+        return result
+
+    result = require_terms(
+        root,
+        "CONTRIBUTING.md",
+        ("Update public documentation whenever behavior changes", "README.md", "docs/", "examples", "validation"),
+    )
+    if result is not None:
+        return result
+
+    result = require_terms(
+        root,
         "skill/obsidian-memory-closeout/SKILL.md",
         (
             "Read Receipt Closeout Rule",

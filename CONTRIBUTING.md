@@ -10,6 +10,7 @@ Thanks for improving `obsidian-memory-closeout`.
 - Move optional detail into `references/`.
 - Test scripts by running them locally.
 - Keep examples synthetic and privacy-safe.
+- Update public documentation whenever behavior changes. At minimum, update `README.md`; update `docs/`, examples, validation, and release notes when the change affects users.
 
 ## Maintainer Privacy Note
 
