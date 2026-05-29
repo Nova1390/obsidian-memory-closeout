@@ -120,6 +120,17 @@ Duplication/noise: no duplicate session note needed.
 Coverage gaps: daily alert opt-in remains an open loop.
 ```
 
+## 5. Verification
+
+```text
+Read receipt closeout: completed by session note session-2026-01-15-project-alpha-notifications.
+Local checks: passed.
+Derived indexes: not configured for this synthetic vault.
+Git status: inspected.
+Staging: only the session closeout and related durable note updates would be staged.
+Checkpoint commit: appropriate for meaningful memory changes.
+```
+
 ## What Was Not Saved
 
 - The raw AI session transcript.

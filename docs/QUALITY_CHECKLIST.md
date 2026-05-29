@@ -15,6 +15,7 @@ Use this checklist when reviewing the repository or preparing a release.
 - The skill has a generic Before Work / During Work / Closeout workflow.
 - Derived graph/index refreshes are optional and use documented vault commands rather than hardcoded private setup.
 - Web clip guidance treats `00_Inbox/Web Clips/raw` as unreviewed source material, not canonical memory.
+- Significant read receipts must close the loop with a curated update, proposal, or explicit no-durable-change marker.
 
 ## Repository Quality
 
@@ -37,3 +38,4 @@ Use this checklist when reviewing the repository or preparing a release.
 - Lint guidance covers schema, links, privacy, stale decisions, duplication/noise, and coverage gaps.
 - Raw web clips are ignored by Git/indexing by default and promoted only after review.
 - Deletion and staging guardrails stop commits with unexpected deletions, raw transcripts, caches, secrets, or unrelated files.
+- Verification guidance includes local checks, supported graph/index refresh, Git status inspection, focused staging, and checkpoint commits when appropriate.

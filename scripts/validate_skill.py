@@ -217,6 +217,34 @@ def main() -> int:
         root,
         "skill/obsidian-memory-closeout/SKILL.md",
         (
+            "Read Receipt Closeout Rule",
+            "If you write a read receipt for significant work",
+            "no-durable-change marker",
+            "Stage only files belonging to the closeout",
+            "Consolidate repeated micro-receipts",
+            "update the classifier or rules",
+            "Do not leave significant read receipts untracked, uncommitted, or unlinked to a closeout",
+        ),
+    )
+    if result is not None:
+        return result
+
+    result = require_terms(
+        root,
+        "docs/QUALITY_CHECKLIST.md",
+        (
+            "Significant read receipts",
+            "no-durable-change marker",
+            "checkpoint commits",
+        ),
+    )
+    if result is not None:
+        return result
+
+    result = require_terms(
+        root,
+        "skill/obsidian-memory-closeout/SKILL.md",
+        (
             "Derived Graph Outputs",
             "documented refresh command",
             "Do not invent graph/index commands",
@@ -281,6 +309,14 @@ def main() -> int:
         "Only durable state is updated",
     )
     result = require_terms(root, "examples/before-after.md", example_memory_terms)
+    if result is not None:
+        return result
+
+    result = require_terms(
+        root,
+        "examples/ingest-query-lint.md",
+        ("Read receipt closeout", "Local checks", "Derived indexes", "Git status", "Checkpoint commit"),
+    )
     if result is not None:
         return result
 

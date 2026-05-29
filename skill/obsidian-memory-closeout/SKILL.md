@@ -66,6 +66,24 @@ At natural stopping points, write only curated durable summaries:
 
 Then lint memory quality, run configured checks, and refresh documented derived indexes or graphs when available.
 
+### Read Receipt Closeout Rule
+
+If you write a read receipt for significant work, close the loop before the final response. The closeout must be one of:
+
+- A curated session, project, decision, reference, or preference update.
+- A memory proposal when canonical placement is unclear.
+- An explicit no-durable-change marker for read-only advisory or tiny tasks.
+
+If memory files changed:
+
+- Run local quality checks documented by the vault.
+- Refresh generated indexes or graphs when supported.
+- Inspect Git status before staging.
+- Stage only files belonging to the closeout when unrelated user edits exist.
+- Create a checkpoint commit when appropriate.
+
+Consolidate repeated micro-receipts from the same work stream into one closeout note. If receipt classification is wrong for a repeated pattern, update the classifier or rules instead of only patching the individual receipt.
+
 ## Operating Model
 
 Follow this loop:
@@ -169,3 +187,4 @@ Read `references/graphify.md` only when the vault documents Graphify or the user
 - If the write would require storing sensitive material, summarize at a safer abstraction or refuse that part.
 - If a derived graph/index refresh is unavailable, leave notes updated and mention that derived outputs were not refreshed.
 - If direct canonical writing is risky, create a memory proposal in the inbox or provide the proposal text to the user.
+- Do not leave significant read receipts untracked, uncommitted, or unlinked to a closeout.
